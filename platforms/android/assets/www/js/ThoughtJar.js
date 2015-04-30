@@ -5,9 +5,6 @@ var ThoughtJar = function(connectorTop, connectorBottom) {
     thoughts = [];
     
     // methods
-    this.initialize = function() {
-     
-    }
     
     this.setThoughts = function(newThoughts){
         thoughts = newThoughts;

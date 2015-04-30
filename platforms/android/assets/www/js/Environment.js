@@ -26,40 +26,4 @@ var Environment = function() {
         return location;
     }
     
-    this.processNotification = function() {
-      
-    }
-    
-    this.sendState = function() {
-      
-    }
-    
-    this.getTemperature = function() {
-      
-    }
-    
-    this.getCity = function() {
-      
-    }
-    
-    this.getWeather = function() {
-      
-    }
-    
-    this.setTemperature = function() {
-      
-    }
-    
-    this.setLatitude = function() {
-      
-    }
-    
-    this.setCity = function() {
-      
-    }
-    
-    this.setWeather = function() {
-      
-    }
-
 }

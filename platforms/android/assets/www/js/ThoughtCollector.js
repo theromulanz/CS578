@@ -3,20 +3,12 @@ var ThoughtCollector = function(connectorTop, connectorBottom) {
 
     var thoughts = [];
             
-    this.initialize = function() {
-        alert(thoughts[1].author);
-    }
     
     this.setThoughts = function(newThoughts){
         thoughts = newThoughts;
     }
     
-    this.notify = function(){
-        
-    }
-    
     this.append = function(newData){
-        //thoughts.unshift(newThought);
         console.log("thoughtColl notifying connector with newData " + newData.action);
         connectorBottom.notify(newData, "thoughtColl append");
         return ;

@@ -169,12 +169,12 @@ var ViewManager = function( connectorTop, connectorBottom) {
     }
     
     function newThread(){
-       var  target = document.getElementById('threadTarget').value;
+        var  target = document.getElementById('threadTarget').value;
         var body = document.getElementById('newPrivateThreadBody').value;
         var name = connectorTop.request("profile", "get", "name", null);
         var datetime = getDateTime();
         var anonymity = false;
-        var newThought = {   // Figure out how to  migrate the logic to server
+        var newThought = {   
                                         "score": 4, 
                                         "author": name, 
                                         "date": datetime, 
@@ -182,14 +182,6 @@ var ViewManager = function( connectorTop, connectorBottom) {
                                         "target": target, 
                                         "body": body
                                     };
-      
-        //thoughtJarThoughts = connectorTop.request("thoughtJar", "get", "thoughts", null);
-
-       /*for(var i = 0; i < thoughtJarThoughts.length; i++){
-            if(target.toLowerCase() == thoughtJarThoughts[i].name.toLowerCase()){
-                thoughtJarThoughts[i].thoughts.unshift(newThought);
-            }
-        }*/
         
         var newThread = {
                                     "name": target,
@@ -198,14 +190,12 @@ var ViewManager = function( connectorTop, connectorBottom) {
                                     "thoughts": [newThought]
                                 };
         
-        //thoughtJarThoughts.unshift(newThread);
         connectorTop.request("thoughtJar", "append", null, newThread);
         location.hash = '#home';
     }
     
     function newPrivateThought(){
         var user = getValueFromHash();
-        //privateThoughts = connectorTop.request("thoughtJar", "find", "name", user);
         var name = connectorTop.request("profile", "get", "name", null);
         var datetime = getDateTime();
         var body = $('#newPrivateThought').val();
@@ -225,8 +215,7 @@ var ViewManager = function( connectorTop, connectorBottom) {
                                     "date": datetime,
                                     "thoughts": [newThought]
                                 };
-                            
-        //privateThoughts.thoughts.unshift(newThought);
+                           
         connectorTop.request("thoughtJar", "append", null, newThread);
         location.hash = '#thoughtJar';
     }
@@ -240,7 +229,7 @@ var ViewManager = function( connectorTop, connectorBottom) {
                                     "thoughts": []
                                 };
         connectorTop.request("thoughtFest", "add", null, newFest);
-        location.hash = '#thoughtFests';
+        location.hash = '#home';
     }
     
     function newFestThought(){

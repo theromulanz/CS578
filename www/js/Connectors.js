@@ -23,7 +23,7 @@ var Connector = function () {
         //alert(JSON.stringify(resource));
         
         // Login request to server
-        if(componentName == "webServer" && action == "login"){
+        if(componentName == "webServer" && (action == "login" || action =="signup") ){
             console.log("connector sending login request + data: ");
 
             if( resource != null){

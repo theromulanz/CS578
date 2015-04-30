@@ -32,6 +32,7 @@ var ViewManager = function( connectorTop, connectorBottom) {
             $('#container').append('<div id="login"></div>');
             var login = $("#login").html(loginTemplate());
             document.getElementById('loginBtn').onclick = validated;
+            document.getElementById('signupBtn').onclick = signup;
             slider.slidePage(login);
         });
         
@@ -309,7 +310,6 @@ var ViewManager = function( connectorTop, connectorBottom) {
                     "resource": loginData
         };
                 
-        //if( connectorTop.request("profile", "get", "password", null) == password && connectorTop.request("profile", "get", "username", null) == username){
         connectorTop.request("webServer", "login", "profile", newData);
     }
     
@@ -320,6 +320,26 @@ var ViewManager = function( connectorTop, connectorBottom) {
         else{
             document.getElementById('login_notification').style.display = 'inline';
         }
+    }
+    
+    function signup() {
+        username = document.getElementById('username').value;
+        password = document.getElementById('password').value;
+        var signupData = {
+            "name": username,
+            "id": "0",
+            "username": username,
+            "password": password,
+            "gender": ""
+        }
+        
+        var newData = {
+                    "componentName": "profile",
+                    "action": "signup",
+                    "resource": signupData
+        };
+
+        connectorTop.request("webServer", "signup", "profile", newData);
     }
     
     function getValueFromHash(){

@@ -5,9 +5,6 @@ var ThoughtFest = function(connectorTop, connectorBottom) {
     var thoughtFests = [];
     
     // methods
-    this.initialize = function() {
-      
-    }
     
     this.setThoughts = function(newThoughts){
         thoughtFests = newThoughts;
@@ -30,56 +27,21 @@ var ThoughtFest = function(connectorTop, connectorBottom) {
     }
     
     this.add = function(newFest){
-        newFest.id = Math.floor((Math.random() * 100000) + 1); 
-        thoughtFests.unshift(newFest);
+       // newFest.id = Math.floor((Math.random() * 100000) + 1); 
+       // thoughtFests.unshift(newFest);
+       connectorBottom.notify(newFest, "thoughtFest add");
     }
     
-    this.append = function(newThought, id){
-        for (var i = 0; i < thoughtFests.length; i++) {
+    this.append = function(newData){
+    console.log("in thoughtFest append");
+        /*for (var i = 0; i < thoughtFests.length; i++) {
             if (thoughtFests[i].id === id) {
                 thoughtFests[i].thoughts.unshift(newThought);
                 return 0;
             }
-        }
+        }*/
+        
+        connectorBottom.notify(newData, "thoughtFest append");
     }
-    
-    this.getDate = function() {
-      
-    }
-    
-    this.getHeadline = function() {
-      
-    }
-    
-   this.insertThought = function() {
-      
-    }
-    
-    this.heapify = function() {
-      
-    }
-    
-    this.deleteThought = function() {
-      
-    }
-    
-    this.getTopThought = function() {
-      
-    }
-    
-    this.getLeftChild = function() {
-      
-    }
-    
-    this.getRightChile = function() {
-      
-    }
-    
-    this.getParent = function() {
-      
-    }
-    
-    this.getSortedThoughts = function() {
-      
-    }
+
 }

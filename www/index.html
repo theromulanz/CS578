@@ -20,7 +20,9 @@
         <input type="text"  name="username" id="username" value="" placeholder="username">
         <input type="password" class='pull-right' name="password" id="password" value="" placeholder="password">
         <button id="loginBtn" class="btn btn-positive btn-block" >Submit</button>
+        <button id="signupBtn" class="btn btn btn-block" >Sign Up</button>
     </div>
+    
 </script>
 
 <script id="home-tpl" type="text/template">
@@ -62,7 +64,7 @@
                 <a href="#thoughts/{{ id }}">
                     <div class="media-body">
                         <h3>{{author}}</h3><i><time>{{date}}</time></i><br>
-                        <h4>Latitude: &nbsp {{ latitude }} &nbsp Longitude: &nbsp {{ longitude }}</h4>
+                        <I>Latitude: &nbsp {{ latitude }} &nbsp Longitude: &nbsp {{ longitude }}</i>
                         <p>{{body}}</p>
                     </div>
                 </a>

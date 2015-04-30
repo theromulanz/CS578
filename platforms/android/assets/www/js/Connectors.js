@@ -6,7 +6,7 @@ var Connector = function () {
 
     // methods
     
-    //
+    // attach components
     this.attachTop = function(newComponent, name){
         newComponent.name = name;
         componentsTopList.push(newComponent);
@@ -17,6 +17,7 @@ var Connector = function () {
         componentsBotList.push(newComponent);
     }
     
+    // requests from components
     this.request = function(componentName, action, resourceName, resource, resource2) {
         
         //alert(JSON.stringify(resource));
@@ -109,7 +110,7 @@ var Connector = function () {
                 return obj[methodName](resource);
             }
             else{
-                console.log("connector created newData and call to thought Coll "+ arguments.callee.caller.name);
+                console.log("connector created newData and call  from "+ arguments.callee.caller.name);
                 var newData = {
                     "user": "",
                     "componentName": componentName,
