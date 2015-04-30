@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link href="assets/ratchet/css/ratchet.css" rel="stylesheet">
+    <link href="assets/css/styles.css" rel="stylesheet">
+    <link href="assets/css/pageslider.css" rel="stylesheet">
+    
+</head>
+<body>
+
+<script id="login-tpl" type="text/template">
+    <header class="bar bar-nav">
+        <h1 class="title">Login</h1>
+    </header>
+    <div class="content">
+        <br>
+        <i id="login_notification" style="display:none">Username or Password is incorrect!</i>
+        <input type="text"  name="username" id="username" value="" placeholder="username">
+        <input type="password" class='pull-right' name="password" id="password" value="" placeholder="password">
+        <button id="loginBtn" class="btn btn-positive btn-block" >Submit</button>
+    </div>
+</script>
+
+<script id="home-tpl" type="text/template">
+    <header class="bar bar-nav">
+        <h1 class="title">Home</h1>
+    </header>
+    <div class="content">
+        <a  href="#thoughtCollector">
+        <button class="btn btn-primary btn-block">Public Thought Collector</button>
+        </a>
+        <a id=""   href="#thoughtJar">
+        <button class="btn btn-positive btn-block">Private Thought Jar</button>
+        </a>
+        <a id=""  href="#thoughtFests">
+        <button class="btn btn-primary btn-block btn-outlined" >Public Thought Fests</button>
+        </a>
+        <a id=""  href="#login">
+        <button class="btn btn-negative btn-block" >Log Out</button>
+        </a>
+    </div>
+</script>
+
+<script id="thoughtCollector-tpl" type="text/template">
+    <header class="bar bar-nav">
+        <a id="composeThoughtBtn"  class="btn btn-link btn-nav pull-left" href="#thoughtBuilder">
+            <span class="icon icon-compose"></span>
+        </a>
+        <h1 class="title">Thought Collector</h1>
+        <a id="homeBtn"  class="btn btn-link btn-nav pull-right" href="#home">
+            <span class="icon icon-home"></span>
+        </a>
+        
+    </header>
+    <div class="content">
+        <!-- <button id="refreshThoughtCollectorBtn" class="btn btn-primary btn-block btn-outlined" >Refresh Thoughts</button> -->
+        <ul class="table-view">
+            {{#each this}}
+            <li class="table-view-cell media">
+                <a href="#thoughts/{{ id }}">
+                    <div class="media-body">
+                        <h3>{{author}}</h3><i><time>{{date}}</time></i><br>
+                        <h4>Latitude: &nbsp {{ latitude }} &nbsp Longitude: &nbsp {{ longitude }}</h4>
+                        <p>{{body}}</p>
+                    </div>
+                </a>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+</script>
+
+<script id="thoughtBuilder-tpl" type="text/template">
+    <header class="bar bar-nav">
+        <a class="btn btn-link btn-nav pull-left" href="#thoughtCollector">
+            <span class="icon icon-trash"></span>
+        </a>
+        <h1 class="title">Thought Builder</h1>
+    </header>
+    <div class="content">
+        <br>
+
+        <label for="anonymity">Anonymous?</label>
+        <input type="checkbox" class='pull-right' name="checkbox" id="anonymity" value="value">
+        <textarea rows="5" id="newThought" placeholder="Write your thought here"></textarea>
+        <button id="newThoughtBtn" class="btn btn-positive btn-block">Float Your Thought</button>
+    </div>
+</script>
+
+<script id="thoughtJar-tpl" type="text/template">
+    <header class="bar bar-nav">    
+        <a id="composePrivateThreadBtn"  class="btn btn-link btn-nav pull-left" href="#privateThreadBuilder">
+            <span class="icon icon-compose"></span>
+        </a>
+        <h1 class="title">Thought Jar</h1>
+        <a id="homeBtn"  class="btn btn-link btn-nav pull-right" href="#home">
+            <span class="icon icon-home"></span>
+        </a>
+    </header>
+    <div class="content">
+        <ul class="table-view">
+            {{#each this}}
+            <li class="table-view-cell media">
+                <a href="#thoughtJar/{{ name }}">
+                    <div class="media-body">
+                        <h3>{{name}}</h3>
+                    </div>
+                </a>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+</script>
+
+<script id="privateThreadBuilder-tpl" type="text/template">
+    <header class="bar bar-nav">
+        <a class="btn btn-link btn-nav pull-left" href="#thoughtJar">
+            <span class="icon icon-trash"></span>
+        </a>
+        <h1 class="title">Private Thread Builder</h1>
+    </header>
+    <div class="content">
+        <br>
+        <input type="text" id="threadTarget"placeholder="Target Username">
+        <textarea rows="5" id="newPrivateThreadBody" placeholder="Write your thought here"></textarea>
+        <button id="newPrivateThreadBtn" class="btn btn-positive btn-block">Float Your Private Thought</button>
+    </div>
+</script>
+
+<script id="thoughtJarUser-tpl" type="text/template">
+    <header class="bar bar-nav">    
+        <a id="composePrivateThoughtBtn"  class="btn btn-link btn-nav pull-left" href="">
+            <span class="icon icon-compose"></span>
+        </a>
+        <h1 id="thoughtJarUser" class="title">Thought Jar User</h1>
+        <a id="homeBtn"  class="btn btn-link btn-nav pull-right" href="#thoughtJar">
+            <span class="icon icon-left-nav"></span>
+        </a>
+    </header>
+    <div class="content">
+        <ul class="table-view">
+            {{#each this}}
+            <li class="table-view-cell media">
+                <a href="#thoughts/{{ id }}">
+                    <div class="media-body">
+                        <h3>{{author}}</h3><i><time>{{date}}</time></i>
+                        <p>{{body}}</p>
+                    </div>
+                </a>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+</script>
+
+<script id="privateThoughtBuilder-tpl" type="text/template">
+    <header class="bar bar-nav">
+        <a class="btn btn-link btn-nav pull-left" href="#thoughtJar">
+            <span class="icon icon-trash"></span>
+        </a>
+        <h1 class="title">Private Thought Builder</h1>
+    </header>
+    <div class="content">
+        <br>
+        <textarea rows="5" id="newPrivateThought" placeholder="Write your thought here"></textarea>
+        <button id="newPrivateThoughtBtn" class="btn btn-positive btn-block">Float Your Private Thought</button>
+    </div>
+</script>
+
+<script id="thoughtFests-tpl" type="text/template">
+    <header class="bar bar-nav">    
+        <a id="t"  class="btn btn-link btn-nav pull-left" href="#thoughtFestBuilder">
+            <span class="icon icon-compose"></span>
+        </a>
+        <h1 class="title">Thought Fests</h1>
+        <a id="homeBtn"  class="btn btn-link btn-nav pull-right" href="#home">
+            <span class="icon icon-home"></span>
+        </a>
+    </header>
+    <div class="content">
+        <ul class="table-view">
+            {{#each this}}
+            <li class="table-view-cell media">
+                <a href="#thoughtFests/{{ id }}">
+                    <div class="media-body">
+                        <h3>{{title}}</h3><i>Expiration: <time>{{date}}</time></i>
+                    </div>
+                </a>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+</script>
+
+<script id="thoughtFest-tpl" type="text/template">
+    <header class="bar bar-nav">
+        <a id="composeFestThoughtBtn"  class="btn btn-link btn-nav pull-left" href="#thoughtBuilderFest">
+            <span class="icon icon-compose"></span>
+        </a>
+        <h1 class="title">Thought Fest</h1>
+        <a id="homeBtn"  class="btn btn-link btn-nav pull-right" href="#thoughtFests">
+            <span class="icon icon-left-nav"></span>
+        </a>
+    </header>
+    <div class="content">
+        <ul class="table-view">
+            {{#each this}}
+            <li class="table-view-cell media">
+                <a href="#thoughts/{{ id }}">
+                    <div class="media-body">
+                        <h3>{{author}}</h3><i><time>{{date}}</time></i>
+                        <p>{{body}}</p>
+                    </div>
+                </a>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+</script>
+
+<script id="thoughtFestBuilder-tpl" type="text/template">
+    <header class="bar bar-nav">
+        <a class="btn btn-link btn-nav pull-left" href="#thoughtFests">
+            <span class="icon icon-trash"></span>
+        </a>
+        <h1 class="title">Thought Fest Builder</h1>
+    </header>
+    <div class="content">
+        <br>
+        <textarea rows="5" id="newThoughtFestTitle" placeholder="Name your Thought Fest"></textarea>
+        <button id="newThoughtFestBtn" class="btn btn-positive btn-block">Create your new Thought Fest</button>
+    </div>
+</script>
+
+<script id="thoughtBuilderFest-tpl" type="text/template">
+    <header class="bar bar-nav">
+        <a class="btn btn-link btn-nav pull-left" href="#thoughtFests">
+            <span class="icon icon-trash"></span>
+        </a>
+        <h1 class="title">Thought Builder - Fest</h1>
+    </header>
+    <div class="content">
+        <br>
+
+        <label for="anonymity">Anonymous?</label>
+        <input type="checkbox" class='pull-right' name="checkbox" id="anonymityFestThought" value="value">
+        <textarea rows="5" id="newFestThought" placeholder="Write your thought here"></textarea>
+        <button id="newFestThoughtBtn" class="btn btn-positive btn-block">Float Your Thought</button>
+    </div>
+</script>
+
+<div id='container'></div>
+
+
+<script src="cordova.js"></script>
+<script src="lib/fastclick.js"></script>
+<script src="lib/handlebars.js"></script>
+<script src="lib/jquery.js"></script>
+<script src="lib/pageslider.js"></script>
+<script src="lib/router.js"></script>
+
+<script src="js/CacheService.js" type="text/javascript"></script>
+<script src="js/Connectors.js" type="text/javascript"></script>
+<script src="js/Environment.js" type="text/javascript"></script>
+<script src="js/Profile.js" type="text/javascript"></script>
+<script src="js/ThoughtBuilder.js" type="text/javascript"></script>
+<script src="js/ThoughtCollector.js" type="text/javascript"></script>
+<script src="js/ThoughtFest.js" type="text/javascript"></script>
+<script src="js/ThoughtJar.js" type="text/javascript"></script>
+<script src="js/ViewManager.js" type="text/javascript"></script>
+<script src="js/WebServerMock.js" type="text/javascript"></script>
+<script src="js/main.js" type="text/javascript"></script>
+</body>
+</html>
